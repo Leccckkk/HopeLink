@@ -1,0 +1,92 @@
+﻿@model WebsiteCharity.Models.Donation
+
+<div class="wrapper">
+    <h2>Make a Donation</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success mt-3">
+            @TempData["Success"]
+        </div>
+    }
+
+    <form asp-action="Donate" method="post">
+        <input asp-for="DonorName" placeholder="Your Name" required class="form-control mb-2 short-input" />
+        <input asp-for="Amount" placeholder="Amount" type="number" min=1 required class="form-control mb-3 short-input amount" />
+
+        <label>Select Payment Method:</label>
+        <select id="paymentMethod" name="paymentMethod" class="form-control mb-3 short-input" required>
+            <option value="">-- Choose an option --</option>
+            <option value="gcash">GCash</option>
+            <option value="paymaya">PayMaya</option>
+        </select>
+
+        <!-- GCash input -->
+        <div id="gcashInfo" class="payment-info" style="display:none;">
+            <label for="gcashNumber">Your GCash Number:</label>
+            <input type="text" id="gcashNumber" name="gcashNumber" placeholder="Enter your GCash number" class="form-control mb-3" />
+        </div>
+
+        <!-- PayMaya input -->
+        <div id="paymayaInfo" class="payment-info" style="display:none;">
+            <label for="paymayaNumber">Your PayMaya Number:</label>
+            <input type="text" id="paymayaNumber" name="paymayaNumber" placeholder="Enter your PayMaya number" class="form-control mb-3" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Donate</button>
+    </form>
+</div>
+
+<script>
+    const methodSelect = document.getElementById("paymentMethod");
+    const gcashInfo = document.getElementById("gcashInfo");
+    const paymayaInfo = document.getElementById("paymayaInfo");
+
+    methodSelect.addEventListener("change", function () {
+        const method = this.value;
+        gcashInfo.style.display = (method === "gcash") ? "block" : "none";
+        paymayaInfo.style.display = (method === "paymaya") ? "block" : "none";
+    });
+</script>
+
+<style>
+    .wrapper {
+        max-width: 480px;
+        margin: 50px auto;
+        padding: 25px 35px;
+        background: rgba(39, 39, 39, 0.85);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+        font-family: 'Montserrat', sans-serif;
+        color: #f0f0f0;
+        text-align: center;
+    }
+
+    h2 {
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+        color: #f9c74f;
+        text-shadow: 0 0 8px #f9c74f88;
+    }
+
+    .short-input {
+        max-width: 300px !important;
+        margin: 0 auto 10px auto;
+        display: block;
+    }
+
+    .qr {
+        max-width: 220px;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .payment-info {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+</style>

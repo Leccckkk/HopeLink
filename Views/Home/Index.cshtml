@@ -1,0 +1,171 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="wrapper">
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-3 mb-3 text-primary">Welcome to HopeLink</h1>
+        <p class="lead mb-5">Join our mission to help people in need.</p>
+
+        <div class="d-flex justify-content-center">
+            <a asp-controller="User" asp-action="Register" class="btn btn-lg btn-primary mx-2">Create Account</a>
+            <a asp-controller="User" asp-action="Login" class="btn btn-lg btn-outline-dark mx-2">Login</a>
+                <a asp-controller="User" asp-action="Login" class="btn btn-lg btn-success mx-2">Donate Now</a>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-12">
+            <div class="humanitarian-section">
+                <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif; color: var(--primary-brown); font-size: 2.5rem; font-weight: 700;">Making a Difference Together</h2>
+                <div class="image-card mb-4">
+                    <div class="image-container">
+                        <div class="humanitarian-scene aid-distribution-scene">
+                            <div class="scene-description">
+                                <h3 style="color: white; font-family: 'Playfair Display', serif; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">Direct Aid Distribution</h3>
+                                <p style="color: white; line-height: 1.6; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">Our teams work directly with communities to distribute essential supplies including food, water, and medical aid. Every donation reaches those who need it most through our network of trusted local partners.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <div class="image-container">
+                        <div class="humanitarian-scene children-aid-scene">
+                            <div class="scene-description">
+                                <h3 style="color: white; font-family: 'Playfair Display', serif; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">Hope for the Next Generation</h3>
+                                <p style="color: white; line-height: 1.6; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">Children are the most vulnerable in times of crisis. Your support ensures that families receive the resources they need to care for their children, providing hope and stability for the future.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<style>
+.humanitarian-section {
+    background: rgba(253, 245, 230, 0.8);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    border: 2px solid var(--soft-beige);
+    box-shadow: 0 8px 32px rgba(139, 69, 19, 0.1);
+}
+
+.image-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--soft-beige);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(139, 69, 19, 0.15);
+}
+
+.image-container {
+    position: relative;
+    min-height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.humanitarian-scene {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.aid-distribution-scene {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 30%, #CD7F32 70%, #DAA520 100%);
+    position: relative;
+}
+
+.aid-distribution-scene::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 0%, transparent 50%),
+        linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    animation: shimmer 4s ease-in-out infinite;
+}
+
+.children-aid-scene {
+    background: linear-gradient(135deg, #DAA520 0%, #CD7F32 30%, #A0522D 70%, #8B4513 100%);
+    position: relative;
+}
+
+.children-aid-scene::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.4) 0%, transparent 60%),
+        radial-gradient(circle at 70% 80%, rgba(255,255,255,0.3) 0%, transparent 60%),
+        linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.2) 60%, transparent 80%);
+    animation: shimmer 4s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+@@keyframes shimmer {
+    0%, 100% { 
+        transform: translateX(-100%) rotate(45deg); 
+        opacity: 0.3; 
+    }
+    50% { 
+        transform: translateX(100%) rotate(45deg); 
+        opacity: 0.7; 
+    }
+}
+
+
+.scene-description h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.scene-description p {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+@@media (max-width: 768px) {
+    .humanitarian-section {
+        padding: 2rem 1rem;
+    }
+    
+    .image-card {
+        padding: 1.5rem;
+    }
+    
+    .scene-description h3 {
+        font-size: 1.3rem;
+    }
+    
+    .scene-description p {
+        font-size: 0.9rem;
+    }
+}
+</style>
+

@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebsiteCharity</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebsiteCharity.styles.css" asp-append-version="true" />
+    <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <img src="~/logo.png" alt="WebsiteCharity Logo" style="height: 80px; margin-right: 10px;">
+                <b>HopeLink</b>
+            </a>
+            <div class="nav-menu">
+                <ul>
+                    <li><a asp-controller="Home" asp-action="Index" class="link">Home</a></li>
+                    <li><a asp-controller="Home" asp-action="Blog" class="link">Blog</a></li>
+                    <li><a asp-controller="Donation" asp-action="Donate" class="link">Services</a></li>
+                    <li><a asp-controller="Home" asp-action="About" class="link">About</a></li>
+                </ul>
+            </div>
+
+            <div class="d-flex ms-auto nav-button">
+                @{
+                    var userName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+                    var isAdmin = HttpContextAccessor.HttpContext.Session.GetString("IsAdmin");
+                }
+
+                @if (!string.IsNullOrEmpty(userName))
+                {
+                    <span class="me-3">👋 Welcome, <strong>@userName</strong></span>
+                    @if (isAdmin == "True")
+                    {
+                        <a asp-controller="Admin" asp-action="Dashboard" class="btn white-btn">Dashboard</a>
+                    }
+                    <a asp-controller="User" asp-action="Logout" class="btn btn-outline-danger">Logout</a>
+                }
+                else
+                {
+                    <a asp-controller="User" asp-action="Login" class="btn white-btn">Login</a>
+                    <a asp-controller="User" asp-action="Register" class="btn">Register</a>
+                }
+            </div>
+        </nav>
+    </header>
+
+    <div id="mainContent" class="fade-in-wrapper container">
+        @RenderBody()
+    </div>
+
+    <footer id="mainFooter" class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - WebsiteCharity
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        // Simple fade-in for page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrapper = document.getElementById('mainContent');
+            wrapper.style.opacity = 0;
+            wrapper.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                wrapper.style.transition = 'all 0.6s ease';
+                wrapper.style.opacity = 1;
+                wrapper.style.transform = 'translateY(0)';
+            }, 50);
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+
+<div class="wrapper">
+<h2>Admin Dashboard</h2>
+<hr />
+
+<h4>Statistics</h4>
+<ul>
+    <li><strong>Total Donations:</strong> ₱@ViewBag.TotalDonations</li>
+    <li><strong>Total Users:</strong> @ViewBag.TotalUsers</li>
+</ul>
+
+<hr />
+<h4>Recent Donations</h4>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Donor Name</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var donation in ViewBag.Donations)
+        {
+            <tr>
+                <td>@donation.DonorName</td>
+                <td>₱@donation.Amount</td>
+                <td>@donation.Date</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+<h4>Registered Users</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Admin?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in ViewBag.Users)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.IsAdmin</td>
+            </tr>
+        }
+    </tbody>
+</table>
+    <a asp-controller="User" asp-action="Logout" class="btn btn-danger mt-3">Logout</a>
+</div>
+
+<script>
+    setTimeout(function() {
+        location.reload();
+    }, 10000);
+</script>
+

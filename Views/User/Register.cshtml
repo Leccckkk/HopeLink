@@ -1,0 +1,107 @@
+﻿@model WebsiteCharity.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HopeLink</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .wrapper {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 30%, #CD7F32 70%, #DAA520 100%);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .wrapper::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 0%, transparent 50%), linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+                animation: shimmer 4s ease-in-out infinite;
+                pointer-events: none;
+                border-radius: 12px;
+                z-index: 0;
+            }
+
+        @@keyframes shimmer {
+            0%, 100%
+
+        {
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0.3;
+        }
+
+        50% {
+            transform: translateX(100%) rotate(45deg);
+            opacity: 0.7;
+        }
+
+        }
+
+        .wrapper * {
+            position: relative;
+            z-index: 1;
+        }
+
+        input.form-control {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 8px;
+            color: #222;
+            font-weight: 500;
+            padding: 12px 15px;
+            transition: box-shadow 0.3s ease;
+        }
+
+            input.form-control:focus {
+                box-shadow: 0 0 10px #DAA520;
+                outline: none;
+            }
+
+        button.btn-primary {
+            background-color: #DAA520;
+            border: none;
+            font-weight: 700;
+            border-radius: 30px;
+            padding: 12px 30px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px #DAA52099;
+        }
+
+            button.btn-primary:hover {
+                background-color: #f9c74f;
+                box-shadow: 0 6px 15px #f9c74fcc;
+                color: #222;
+            }
+    </style>
+</head>
+
+<div class="wrapper">
+    <h2>Register</h2>
+    <form asp-action="Register" method="post">
+        <input asp-for="Name" placeholder="Name" required class="form-control mb-3" />
+        <input asp-for="Email" placeholder="Email" required class="form-control mb-3" />
+        <input asp-for="Password" type="password" placeholder="Password" required class="form-control mb-4" />
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>

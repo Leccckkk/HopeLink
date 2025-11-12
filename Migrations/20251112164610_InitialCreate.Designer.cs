@@ -12,8 +12,8 @@ using WebsiteCharity.Data;
 namespace WebsiteCharity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251014161457_AddIsAdminToUsers")]
-    partial class AddIsAdminToUsers
+    [Migration("20251112164610_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
